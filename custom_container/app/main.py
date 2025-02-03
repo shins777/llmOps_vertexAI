@@ -13,14 +13,17 @@ from sklearn.datasets import load_iris
 app = FastAPI()
 gcs_client = storage.Client()
 
-# with open("model.pickle", 'wb') as model_f:
-#     gcs_client.download_blob_to_file(
-#         f"{os.environ['AIP_STORAGE_URI']}/preprocessor.pkl", preprocessor_f
-#     )
-#     gcs_client.download_blob_to_file(
-#         f"{os.environ['AIP_STORAGE_URI']}/model.joblib", model_f
-#     )
 
+with open("model.pickle", 'wb') as model_f:
+    gcs_client.download_blob_to_file(
+        f"{os.environ['AIP_STORAGE_URI']}/model.pickle", model_f
+    )
+    
+    # gcs_client.download_blob_to_file(
+    #     f"{os.environ['AIP_STORAGE_URI']}/model.joblib", model_f
+    # )
+
+    
 with open("model.pickle", "rb") as f:
     model = pickle.load(f)
 
@@ -30,7 +33,7 @@ _model = model
 
 @app.get(os.environ['AIP_HEALTH_ROUTE'], status_code=200)
 def health():
-    return {}
+    return {"status":"OK"}
 
 @app.post(os.environ['AIP_PREDICT_ROUTE'])
 async def predict(request: Request):
