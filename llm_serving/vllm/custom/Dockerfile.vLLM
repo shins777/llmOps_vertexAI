@@ -1,0 +1,4 @@
+FROM us-docker.pkg.dev/deeplearning-platform-release/vertex-model-garden/vllm-inference.cu121.0-5.ubuntu2204.py310
+COPY entrypoint.sh entrypoint.sh
+RUN chmod -R 775 entrypoint.sh
+ENTRYPOINT ["python3", "-m", "vllm.entrypoints.openai.api_server"]

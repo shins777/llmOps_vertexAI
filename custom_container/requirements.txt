@@ -1,3 +1,6 @@
 numpy
 scikit-learn
 google-cloud-storage
+uvicorn[standard]
+gunicorn
+fastapi[all]

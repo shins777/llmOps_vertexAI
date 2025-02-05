@@ -1,2 +1,3 @@
 #!/bin/bash
 export PORT=$AIP_HTTP_PORT
+export WORKER_THREADS=$WORKER_THREADS
